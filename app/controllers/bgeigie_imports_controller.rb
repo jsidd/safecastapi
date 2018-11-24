@@ -111,7 +111,7 @@ class BgeigieImportsController < ApplicationController # rubocop:disable Metrics
 
   def destroy
     bgeigie_import = scope.where(id: params[:id]).first
-    if bgeigie_import && bgeigie_import.destroy
+    if bgeigie_import&.destroy
       redirect_to :bgeigie_imports
     else
       render text: '404 Not Found', status: :not_found
