@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe IngestMeasurement, type: :model do
@@ -6,6 +8,10 @@ RSpec.describe IngestMeasurement, type: :model do
   describe '#data_for_device' do
     before do
       put_template_for_ingest_measurements(described_class.__elasticsearch__.client)
+      [
+        { device_urn: 'safecast:374304606', device: '374304606' },
+        { device_urn: 'safecast:374304606', device: '374304606' }
+      ]
       add_index_to_ingest_measurements(described_class.__elasticsearch__.client, device_urn: 'safecast:374304606', device: '374304606')
     end
 
