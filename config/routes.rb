@@ -2,6 +2,7 @@ Safecast::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   scope '(:locale)', constraints: { locale: /(en-US|ja)/ } do
+    get '/ingest' => 'ingest#index'
     root to: 'dashboards#show'
     devise_for :users
     devise_for :admins
@@ -61,4 +62,6 @@ Safecast::Application.routes.draw do
   match '/count', to: 'measurements#count', via: %i(get)
 
   resources :api_docs, only: [:index]
-end
+
+  match '/ingest.csv' => 'ingest#index', via: :get, defaults: { format: :csv }
+  end
